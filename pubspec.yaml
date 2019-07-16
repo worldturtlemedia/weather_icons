@@ -1,0 +1,25 @@
+name: flutter_weather_icons
+description: Wrapper for weather-icons.
+version: 0.0.1
+author: WorldTurtleMedia <jordon.dehoog@gmail.com>
+email: jordon.dehoog@gmail.com
+repository: https://github.com/worldturtlemedia/flutter_weather_icons
+homepage: https://worldturtlemedia.com
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  fonts:
+    - family: WeatherIcons
+      fonts:
+        - asset: lib/fonts/weathericons-regular-webfont.ttf
+          weight: 400
