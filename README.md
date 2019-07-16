@@ -1,4 +1,4 @@
-# flutter_weather_icons
+# weather_icons
 
 A library for using [WeatherIcons](https://github.com/erikflowers/weather-icons) in Flutter.
 

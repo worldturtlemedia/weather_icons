@@ -1,29 +1,39 @@
 {
-  "name": "flutter_weather_icons",
+  "name": "weather_icons",
   "version": "0.0.0",
   "description": "Wrapper for weather-icons",
   "main": "index.js",
-  "repository": "https://github.com/worldturtlemedia/flutter_weather_icons",
+  "repository": "https://github.com/worldturtlemedia/weather_icons",
   "author": "WorldTurtleMedia <jordon.dehoog@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "commit" : "git-cz",
-    "generate": "node tools/scrape_icons -o ./lib/src"
+    "commit": "git-cz",
+    "test": "flutter test",
+    "format": "flutter format lib test",
+    "lint": "flutter analyze && npm run format -- --set-exit-if-changed",
+    "download": "node tool/download_font",
+    "generate": "node tool/scrape_icons -o ./lib/src",
+    "sync": "npm run download && npm run generate",
+    "publish:dry": "flutter pub pub publish --dry-run"
   },
   "devDependencies": {
-    "fs-extra": "^8.1.0",
-    "x-ray": "^2.3.4",
-    "yargs": "^13.3.0",
+    "@octokit/rest": "^16.28.4",
     "@semantic-release/changelog": "3.0.4",
     "@semantic-release/exec": "3.3.3",
     "@semantic-release/git": "7.0.12",
+    "adm-zip": "^0.4.13",
     "commitizen": "3.1.1",
     "cz-conventional-changelog": "2.1.0",
+    "fs-extra": "^8.1.0",
     "husky": "2.4.1",
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
-    "semantic-release": "15.13.16"
+    "request": "^2.88.0",
+    "semantic-release": "15.13.16",
+    "semver": "^6.2.0",
+    "x-ray": "^2.3.4",
+    "yargs": "^13.3.0"
   },
   "husky": {
     "hooks": {
