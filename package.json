@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "commit" : "git-cz",
-    "generate": "node tools/scrape_icons.js -o ./lib/src"
+    "generate": "node tools/scrape_icons -o ./lib/src"
   },
   "devDependencies": {
     "fs-extra": "^8.1.0",

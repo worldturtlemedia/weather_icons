@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+// Get latest version from github
+// Check local version from lib/fonts/version.json
+// Compare version if needed
+
+// Update needed?
+// Download the latest release from github
+// Unzip to temporary dir (or passed in download dir)
+// copy the ttf to the libs/fonts/ folder
+// write version to version.json
+// Clean up (disable with option)
+
+// Options:
+// v = verbose
+// c = cleanup (clean up temp files)
+// d = download dir (where to download files)
+// o = output dir (where to output files)
+// h = print usage
+
+const yargs = require('yargs').argv
+
+if (yargs.h || yargs.help) return printUsage()
+
+function printUsage() {
+  console.log(`Usage: download_font [options]
+  
+  Download font files for erikflowers/weather-icons.
+
+  Options:
+
+    --help     -h  Print this usage message
+    --url      -u  Provide a custom download url for font file (default: 'https://erikflowers.github.io/weather-icons/')
+    --verbose  -v  Log extra information to stdout             (default: false)
+    --download -d  Directory to download temporary files       (default: /tmp)
+    --output   -o  Directory to place the font files           (default: ./lib/fonts)
+    --clean    -c  Clean up the temporary files                (default: true)
+    `)
+}

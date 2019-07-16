@@ -17,6 +17,10 @@ const filename = yargs.f || yargs.filename || DEFAULT_FILE_NAME
 
 const resolvedOutput = output ? resolve(output) : undefined
 
+if (yargs.h || yargs.help) {
+  return printUsage()
+}
+
 start().catch(err => console.error(`Unhandled error: ${err}`))
 
 async function start() {
@@ -147,17 +151,18 @@ async function writeFile(dartCode) {
 }
 
 function printUsage() {
-  console.log(`Usage: scrape_icons.js [options]
+  console.log(`Usage: scrape_icons [options]
 
   Scrapper for erikflowers/weather-icons.
 
   Options:
 
-    --url (-u)      Provide a custom url to scrape     (default: 'https://erikflowers.github.io/weather-icons/')
-    --verbose (-v)  Log extra information to stdout    (default: false)
-    --print (-p)    Print the result to stdout         (default: false)
-    --output (-o)   File path to output the result too
-    --filename (-f) Name of the file to generate       (default: weather_icon.dart)
+    --help     -h  Print this usage message
+    --url      -u  Provide a custom url to scrape     (default: 'https://erikflowers.github.io/weather-icons/')
+    --verbose  -v  Log extra information to stdout    (default: false)
+    --print    -p  Print the result to stdout         (default: false)
+    --output   -o  File path to output the result too 
+    --filename -f  Name of the file to generate       (default: weather_icon.dart)
 
   Either '--output' or '--print' is required!
   `)
