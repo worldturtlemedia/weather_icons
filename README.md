@@ -58,7 +58,13 @@ class WeatherDisplay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Icon(WeatherIcons.fromString(weatherCode)),
+          Icon(
+            WeatherIcons.fromString(
+                weatherCode,
+                // Fallback is optional, throws if not found, and not supplied.
+                fallback: WeatherIcons.na
+            ),
+          ),
           Text("Icon for '$weatherCode'"),
         ],
       ),
@@ -124,7 +130,7 @@ A full example can be found in the [example](https://github.com/worldturtlemedia
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/worldturtlemedia/weather_icons/blob/master/.github/CONTRIBUTING.md)
+See [CONTRIBUTING](https://github.com/worldturtlemedia/weather_icons/blob/master/CONTRIBUTING.md)
 
 ## License
 
