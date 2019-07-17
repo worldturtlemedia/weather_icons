@@ -117,7 +117,21 @@ async function scrapeIconData() {
 }
 
 function generateIcon(title, code) {
-  const icon = `static const IconData ${title} = const _Icon(0x${code});`
+  const url = '[WeatherIcons](https://erikflowers.github.io/weather-icons/)'
+  const name = title.replace('wi-', '').replace(/-/g, '_')
+  const comment =
+    title !== 'wind'
+      ? `/// [IconData] for '${title}' from ${url}.`
+      : `
+  /// [IconData] for the base wind icon from ${url}.
+  ///
+  /// To achieve a rotated wind icon see [WindIcon].
+    `.trim()
+
+  const icon = `
+  ${comment}
+  static const IconData ${name} = const _Icon(0x${code});`.trimLeft()
+
   if (verbose) console.log(`Generating: ${icon}`)
   return icon
 }
@@ -137,9 +151,7 @@ ${versionString}`.trim()
 }
 
 function generateDartFile(iconData, version, date) {
-  const icons = iconData.map(({ title, code }) =>
-    generateIcon(title.replace('wi-', '').replace(/-/g, '_'), code),
-  )
+  const icons = iconData.map(({ title, code }) => generateIcon(title, code))
 
   const iconMap = iconData.map(({ title, code }) => `'${title}': 0x${code},`)
 
@@ -161,9 +173,10 @@ import 'package:flutter/material.dart';
 ///       onPressed: () { print("Hello World"); }
 ///     );
 class WeatherIcons {
-  ${icons.join('\n  ')}
+  ${icons.join('\n\n  ')}
 
   /// Get the matching [IconData] from the WeatherIcon name.
+  /// Pass in a [fallback] or else it will throw.
   ///
   /// See [WeatherIcons](https://erikflowers.github.io/weather-icons/) for more info.
   ///
@@ -173,13 +186,17 @@ class WeatherIcons {
   ///       icon: new Icon(WeatherIcons.fromName('wi-day-sunny')),
   ///       onPressed: () { print("Hello World"); }
   ///     );
-  static IconData fromName(String name, {bool shouldThrow = false}) {
+  static IconData fromName(
+    String name, {
+    IconData fallback,
+  }) {
     final target = name.replaceAll('_', '-');
-    if (!_all.containsKey(target) && shouldThrow) {
-      throw UnsupportedError('Unsupported icon $name');
+    final exists = _all.containsKey(target);
+    if (!exists && fallback == null) {
+      throw UnsupportedError('Unsupported icon $name, with no fallback');
     }
 
-    return _Icon(_all[target]) ?? WeatherIcons.na;
+    return exists ? _Icon(_all[target]) : fallback;
   }
 
   static const Map<String, int> _all = {

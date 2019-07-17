@@ -1,6 +1,6 @@
 name: weather_icons
 description: Wrapper for weather-icons.
-version: 0.0.1
+version: 0.0.0 # Handled by semantic-release
 author: WorldTurtleMedia <jordon.dehoog@gmail.com>
 email: jordon.dehoog@gmail.com
 repository: https://github.com/worldturtlemedia/weather_icons

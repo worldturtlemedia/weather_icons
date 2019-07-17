@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:weather_icons/weather_icons.dart';
+import 'package:weather_icons/src/util/rotate.dart';
 
 import 'util/test_widget.dart';
 
@@ -11,18 +13,36 @@ void main() {
   });
 
   test('get correct icon from name', () {
-    expect(WeatherIcons.fromName('wi-day-sunny'), WeatherIcons.day_sunny);
+    expect(WeatherIcons.fromString('wi-day-sunny'), WeatherIcons.day_sunny);
   });
 
-  // TODO: Figure out why this test is broken
-  // test('return default if no icon matched', () {
-  //   expect(
-  //     WeatherIcons.fromName('not-found', fallback: WeatherIcons.na),
-  //     WeatherIcons.na,
-  //   );
-  // });
+  test('return default if no icon matched', () {
+    expect(
+      WeatherIcons.fromString('not-found', fallback: WeatherIcons.na),
+      WeatherIcons.na,
+    );
+  });
 
   test('throw if unsupported icon with no fallback', () {
-    expect(() => WeatherIcons.fromName('not-found'), throwsUnsupportedError);
+    expect(() => WeatherIcons.fromString('not-found'), throwsUnsupportedError);
+  });
+
+  testWidgets('create a rotated child', (t) async {
+    final child = TestWidget(child: Icon(WeatherIcons.cloud));
+    final rotated = Rotate(
+      child: child,
+      angle: 100,
+    );
+    await t.pumpWidget(rotated);
+
+    expect(find.byWidget(child), findsOneWidget);
+  });
+
+  test('should throw on null constructor params', () {
+    expect(
+      () => Rotate(angle: null, child: Placeholder()),
+      throwsAssertionError,
+    );
+    expect(() => Rotate(angle: 42, child: null), throwsAssertionError);
   });
 }

@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+const { resolve } = require('path')
+
+const yargs = require('yargs').argv
+const { readFile } = require('fs-extra')
+const { safeLoad, safeDump } = require('js-yaml')
+
+const verbose = yargs.v || yargs.verbose || false
+const version = yargs.version
+
+const PUBSPEC = resolve(__dirname, '..', 'pubspec.yaml')
+
+if (!version) {
+  console.error('No version was supplied!')
+  printUsage()
+  return process.exit(1)
+}
+
+const log = require('./util').createLogger(verbose)
+
+start().catch(err => {
+  console.error(`Unhandled error: ${err}`)
+  process.exit(1)
+})
+
+async function start() {
+  log.i(`Publishing version: ${version}`)
+  log.i(`Using pubspec: ${PUBSPEC}`)
+
+  const pubspec = await readPubspec()
+}
+
+async function readPubspec() {
+  try {
+    const pubspec = await readFile(PUBSPEC, 'utf8')
+    return safeLoad(pubspec)
+  } catch (error) {
+    console.error('Unable to read pubspec!')
+    console.error(error)
+    process.exit(1)
+  }
+}
+
+function printUsage() {
+  log.i(
+    `Usage: publish --version <version> [options]
+
+  Publish new version of weather_icons to pub.dev.
+
+  Options:
+
+    --help     -h  Print this usage message
+    --verbose  -v  Log extra information to stdout (default: false)
+    --version  -c  Version to publish              (required)
+    `.trim(),
+  )
+}

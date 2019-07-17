@@ -15,6 +15,7 @@
     "download": "node tool/download_font",
     "generate": "node tool/scrape_icons -o ./lib/src",
     "sync": "npm run download && npm run generate",
+    "publish": "npm run publish",
     "publish:dry": "flutter pub pub publish --dry-run"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "cz-conventional-changelog": "2.1.0",
     "fs-extra": "^8.1.0",
     "husky": "2.4.1",
+    "js-yaml": "^3.13.1",
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
     "request": "^2.88.0",
@@ -53,6 +55,35 @@
     "tools/**/*.{js,md,json}": [
       "prettier --write",
       "git add"
+    ]
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "./tool/publish --version=${nextRelease.version}"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            "packages/*.zip",
+            "CHANGELOG.md"
+          ]
+        }
+      ]
     ]
   }
 }

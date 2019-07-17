@@ -1,14 +1,130 @@
 # weather_icons
 
-A library for using [WeatherIcons](https://github.com/erikflowers/weather-icons) in Flutter.
+A Flutter library for using [Weather Icons](https://erikflowers.github.io/weather-icons/).
+
+![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons.svg) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg)
+
+[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/cyclecheck/api-server.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/cyclecheck/api-server/latest/master.svg)
+
+**Note:** All of the icon data is auto-generated based on the latest release of [Weather Icons](https://github.com/erikflowers/weather-icons/releases).
 
 ## Installation
 
-WIP
+Add the dependency to your `pubspec.yaml`
+
+```yaml
+dependencies:
+  weather_icons: 1.0.x # Use the latest version
+```
+
+## Usage
+
+The library exposes all of the [Weather Icons](https://erikflowers.github.io/weather-icons/) as `IconData`. The naming convention is the same as the CSS names, minus the `wi-`, and all dashes replaced with underscores. It was named this way to match the default `Icons` class.
+
+If you know which icon you need, you can use the provided constant icons. If you need a dynamic icon see below.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
+
+class MyWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(WeatherIcons.wiDaySunny),
+      onPressed: () {
+          print("Foo");
+      }
+     );
+  }
+}
+```
+
+See [`weather_icons_g.dart`](https://github.com/worldturtlemedia/weather_icons/blob/master/lib/src/weather_icons_g.dart) for all of the icons.
+
+### Dynamic
+
+If you need a dynamic icon at run-time, then you can use the included helper function for converting from the CSS style name to a `IconData`.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
+
+class WeatherDisplay extends StatelessWidget {
+  final String weatherCode;
+
+  WeatherDisplay(this.weatherCode);
+
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Icon(WeatherIcons.fromString(weatherCode)),
+          Text("Icon for '$weatherCode'"),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### Wind Direction
+
+The wind icon is a special icon, as it is one single icon value that is then rotated using CSS. To achieve a similar functionality you can use the `WindIcon` class.
+
+**Note:** This means that `WeatherIcons.wind` will always be the North facing icon.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
+
+class EastlyWindWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return IconButton(
+      // Display a Wind icon facing towards east
+      icon: WindIcon.towards_e,
+      onPressed: () { ... }
+     );
+  }
+}
+```
+
+Since the [Weather Icons](https://github.com/erikflowers/weather-icons) support both 'towards' and 'from' wind directions, this library does as well.
+
+### Dynamic Wind Direction
+
+Just like the weather above, if your wind direction is dynamic you can create your own `WindIcon`.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
+
+class WindDirectionDisplay extends StatelessWidget {
+  final double windDirectionDegree;
+
+  WindDirectionDisplay(this.windDirectionDegree);
+
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          WindIcon(angle: windDirectionDegree),
+          Text("Icon for wind @ $windDirectionDegree°"),
+        ],
+      ),
+    );
+  }
+}
+```
+
+**Note:** The angle is in degrees of a compass/circle, so 0-360.
+
+## Example
+
+A full example can be found in the [example](https://github.com/worldturtlemedia/weather_icons/tree/master/example) folder.
 
 ## Contributing
 
-WIP
+See [CONTRIBUTING](https://github.com/worldturtlemedia/weather_icons/blob/master/.github/CONTRIBUTING.md)
 
 ## License
 
