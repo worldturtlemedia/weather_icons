@@ -4,7 +4,7 @@ A Flutter library for using [Weather Icons](https://erikflowers.github.io/weathe
 
 ![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons.svg) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg)
 
-[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/cyclecheck/api-server.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/cyclecheck/api-server/latest/master.svg)
+[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/cyclecheck/api-server.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)
 
 **Note:** All of the icon data is auto-generated based on the latest release of [Weather Icons](https://github.com/erikflowers/weather-icons/releases).
 
