@@ -80,7 +80,7 @@ async function getIconData() {
     }
 
     return result.map(({ title, code }) => ({
-      title: title.trim().replace(/-/g, '_'),
+      title: title.trim(),
       code: code.trim(),
     }))
   } catch (error) {
@@ -113,7 +113,7 @@ async function scrapeIconData() {
     title: icon.title.replace('wi-', ''),
   }))
 
-  return [...renamed, ...MANUAL_ICONS]
+  return [...filtered.icons, ...MANUAL_ICONS]
 }
 
 function generateIcon(title, code) {
@@ -137,9 +137,11 @@ ${versionString}`.trim()
 }
 
 function generateDartFile(iconData, version, date) {
-  const icons = iconData
-    .map(({ title, code }) => generateIcon(title, code))
-    .join('\n  ')
+  const icons = iconData.map(({ title, code }) =>
+    generateIcon(title.replace('wi-', '').replace(/-/g, '_'), code),
+  )
+
+  const iconMap = iconData.map(({ title, code }) => `'${title}': 0x${code},`)
 
   return `
 ${genHeader(version, date)}
@@ -150,6 +152,8 @@ import 'package:flutter/material.dart';
 ///
 /// See [WeatherIcons](${targetUrl}) for more info.
 ///
+/// For getting a rotated wind icon, you can use [WindIcon] widget.
+///
 /// Sample Usage:
 ///
 ///     IconButton(
@@ -157,7 +161,30 @@ import 'package:flutter/material.dart';
 ///       onPressed: () { print("Hello World"); }
 ///     );
 class WeatherIcons {
-  ${icons}
+  ${icons.join('\n  ')}
+
+  /// Get the matching [IconData] from the WeatherIcon name.
+  ///
+  /// See [WeatherIcons](https://erikflowers.github.io/weather-icons/) for more info.
+  ///
+  /// Sample Usage:
+  ///
+  ///     IconButton(
+  ///       icon: new Icon(WeatherIcons.fromName('wi-day-sunny')),
+  ///       onPressed: () { print("Hello World"); }
+  ///     );
+  static IconData fromName(String name, {bool shouldThrow = false}) {
+    final target = name.replaceAll('_', '-');
+    if (!_all.containsKey(target) && shouldThrow) {
+      throw UnsupportedError('Unsupported icon $name');
+    }
+
+    return _Icon(_all[target]) ?? WeatherIcons.na;
+  }
+
+  static const Map<String, int> _all = {
+    ${iconMap.join('\n    ')}
+  };
 }
 
 class _Icon extends IconData {
@@ -172,13 +199,15 @@ class _Icon extends IconData {
 }
 
 function generateTestFile(iconData, version, date) {
-  const icons = iconData.map(({ title }) => {
-    return `
+  const icons = iconData
+    .map(({ title }) => title.replace('wi-', '').replace(/-/g, '_'))
+    .map(title => {
+      return `
   testWidgets('create WeatherIcons.${title}', (t) async {
     await _p(t, WeatherIcons.${title});
     _e(WeatherIcons.${title});
   });`.trim()
-  })
+    })
 
   return `
 ${genHeader(version, date)}

@@ -5,7 +5,7 @@ import 'package:weather_icons/weather_icons.dart';
 class Time {
   static IconData fromHour(int hour) {
     final index = hour - 1;
-    if (hour <= 1 || hour > 12) {
+    if (hour < 1 || hour > 12) {
       throw UnsupportedError('Unsupported hour $hour');
     }
 
