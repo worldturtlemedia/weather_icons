@@ -3,8 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 void main() {
-  // January 1, 2000 3:00:00 AM GMT-05:00
-  final date = DateTime.fromMillisecondsSinceEpoch(946713600000);
+  final date = DateTime.parse("2000-01-01 03:00:00 Z");
 
   test('should return the correct icon data from hour int', () {
     expect(TimeIcon.fromHour(5), WeatherIcons.time_5);
