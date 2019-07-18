@@ -1,6 +1,5 @@
 #!/bin/bash
 
-TAG="Version"
 CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PARENT="$(cd $CWD/.. >/dev/null 2>&1 && pwd)"
 
@@ -21,6 +20,14 @@ if [ ! $retVal -eq 0 ]; then
   exit 1
 fi
 
+echo "Performing a dry-run of publish for $1"
+flutter pub pub publish --dry-run
+retVal=$?
+if [ ! $retVal -eq 0 ]; then
+  echo "Dry-run failed!"
+  exit 1
+fi
+
 echo "Publishing version $1 to pub.dev"
 flutter pub publish
 retVal=$?
@@ -29,4 +36,4 @@ if [ ! $retVal -eq 0 ]; then
   exit 1
 fi
 
-echo "Finished"
+echo "Finished Publish"

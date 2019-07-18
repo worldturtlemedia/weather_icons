@@ -4,7 +4,7 @@ A Flutter library for using [Weather Icons](https://erikflowers.github.io/weathe
 
 ![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg) [![Coverage Status](https://coveralls.io/repos/github/worldturtlemedia/weather_icons/badge.svg?branch=master)](https://coveralls.io/github/worldturtlemedia/weather_icons?branch=master)
 
-[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/cyclecheck/api-server.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)
+[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/worldturtlemedia/weather_icons.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)
 
 **Note:** All of the icon data is auto-generated based on the latest release of [Weather Icons](https://github.com/erikflowers/weather-icons/releases).
 
@@ -127,6 +127,10 @@ class WindDirectionDisplay extends StatelessWidget {
 ## Example
 
 A full example can be found in the [example](https://github.com/worldturtlemedia/weather_icons/tree/master/example) folder.
+
+## TODO
+
+- Add support for the weather service mappings [here](https://erikflowers.github.io/weather-icons/api-list.html)
 
 ## Contributing
 

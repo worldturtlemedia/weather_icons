@@ -1,8 +1,0 @@
-{
-  "extends": ["config:base"],
-  "automerge": true,
-  "baseBranches": ["next"],
-  "major": {
-    "automerge": false
-  }
-}
