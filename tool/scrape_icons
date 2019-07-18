@@ -23,6 +23,7 @@ const resolvedOutput = output ? resolve(output) : undefined
 
 const mainFilePath = join(resolvedOutput, filename)
 const testFilePath = join(DEFAULT_TEST_FILE_PATH, DEFAULT_TEST_FILE_NAME)
+const exampleFilePath = resolve(__dirname, '..', 'example/lib/util.dart')
 
 const MANUAL_ICONS = [{ title: 'wind', code: 'f0b1' }]
 
@@ -58,8 +59,10 @@ async function start() {
 
   const versionPath = genVersionPath(resolve(__dirname, '..'))
   const fontVersion = await checkLocalVersion(versionPath, verbose)
+
   const generatedDartFile = generateDartFile(rawIcons, fontVersion, now)
   const generatedDartTestFile = generateTestFile(rawIcons, fontVersion, now)
+  const generatedIconMapFile = genExampleIconMap(rawIcons, fontVersion, now)
 
   if (print) {
     console.log('Generated file:')
@@ -69,6 +72,7 @@ async function start() {
   if (output) {
     await writeFile(mainFilePath, generatedDartFile)
     await writeFile(testFilePath, generatedDartTestFile)
+    await writeFile(exampleFilePath, generatedIconMapFile)
   }
 }
 
@@ -211,6 +215,21 @@ class _Icon extends IconData {
           fontFamily: 'WeatherIcons',
           fontPackage: 'weather_icons',
         );
+}
+`.trimLeft()
+}
+
+function genExampleIconMap(iconData, version, date) {
+  const iconMap = iconData.map(({ title, code }) => `'${title}': 0x${code},`)
+
+  return `
+class WeatherIconsUtil {
+  static const String version = "${version}";
+  static const double dateTimestamp = ${date.getTime()};
+
+  static const Map<String, int> iconMap = {
+    ${iconMap.join('\n    ')}
+  };
 }
 `.trimLeft()
 }

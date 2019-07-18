@@ -1,0 +1,19 @@
+name: weather_icons_example
+description: An example showcasing the `weather_icons` package.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  weather_icons:
+    path: ../
+
+  cupertino_icons: ^0.1.2
+
+flutter:
+  uses-material-design: true
