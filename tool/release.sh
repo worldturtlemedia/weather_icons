@@ -29,7 +29,7 @@ if [ ! $retVal -eq 0 ]; then
 fi
 
 echo "Publishing version $1 to pub.dev"
-flutter pub publish
+flutter pub pub publish --force
 retVal=$?
 if [ ! $retVal -eq 0 ]; then
   echo "Failed to publish to pub.dev!"
