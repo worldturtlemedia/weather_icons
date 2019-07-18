@@ -36,4 +36,4 @@ if [ ! $retVal -eq 0 ]; then
   exit 1
 fi
 
-echo "Finished"
+echo "Finished Publish"
