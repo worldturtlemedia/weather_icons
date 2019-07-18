@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage ./release.sh <version> [decryption password]
+# Usage ./prepare.sh <version> [decryption password]
 # Decryption password can also be set with the env var: PUB_SECRET_PASSWORD
 
 CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
@@ -50,12 +50,6 @@ if [ ! $retVal -eq 0 ]; then
   exit 1
 fi
 
-echo "Publishing version $1 to pub.dev"
-flutter pub pub publish --force
-retVal=$?
-if [ ! $retVal -eq 0 ]; then
-  echo "Failed to publish to pub.dev!"
-  exit 1
-fi
+touch do_release
 
-echo "Finished Publish"
+echo "Finished Prepare"

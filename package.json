@@ -87,7 +87,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "./tool/release.sh ${nextRelease.version}"
+          "prepareCmd": "./tool/prepare.sh ${nextRelease.version}"
         }
       ],
       [
