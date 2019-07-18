@@ -89,9 +89,9 @@ jobs:
           command: cd example && flutter build apk
       - save_android_deps
       - persist_to_workspace:
-          root: example
+          root: ~/project/example/build/app/outputs/apk/release/
           paths:
-            - example/build/app/outputs/apk/release/app-release.apk
+            - app-release.apk
       - store_artifacts:
           path: example/build/app/outputs/apk/release
           destination: outputs
@@ -101,9 +101,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /project/example/build/app/outputs/apk/release/
+          at: ~/project/example/build/app/outputs/apk/release/
       - run: |
-          FILE=/project/example/build/app/outputs/apk/release/app-release.apk
+          FILE=~/project/example/build/app/outputs/apk/release/app-release.apk
           if test -f "$FILE"; then
             echo "Found the apk!";
           else
