@@ -18,7 +18,8 @@ commands:
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
-          path: ~/.cache/yarn
+          paths:
+            - ~/.cache/yarn
 
   install_flutter_deps:
     description: 'Install flutter dependencies from the cache, and save the cache'
@@ -32,7 +33,8 @@ commands:
       - save_cache:
           name: Save Flutter Package Cache
           key: flutter-packages-{{ checksum "pubspec.lock" }}
-          path: ~/.pub-cache
+          paths:
+            - ~/.pub-cache
 
   restore_android_deps:
     description: 'Restore the Android deps from cache'
@@ -47,7 +49,8 @@ commands:
       - save_cache:
           name: Save Android dependencies
           key: jars-{{ checksum "example/android/build.gradle" }}
-          path: ~/.gradle
+          paths:
+            - ~/.gradle
 
 jobs:
   build_library:
