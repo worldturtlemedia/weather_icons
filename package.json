@@ -15,8 +15,7 @@
     "download": "node tool/download_font",
     "generate": "node tool/scrape_icons -o ./lib/src",
     "sync": "npm run download && npm run generate",
-    "publish": "npm run publish",
-    "publish:dry": "flutter pub pub publish --dry-run"
+    "pub:dry": "flutter pub pub publish --dry-run"
   },
   "devDependencies": {
     "@octokit/rest": "^16.28.4",
@@ -25,6 +24,7 @@
     "@semantic-release/git": "7.0.12",
     "adm-zip": "^0.4.13",
     "commitizen": "3.1.1",
+    "coveralls": "^3.0.5",
     "cz-conventional-changelog": "2.1.0",
     "fs-extra": "^8.1.0",
     "husky": "2.4.1",
@@ -72,7 +72,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "./tool/publish --version=${nextRelease.version}"
+          "prepareCmd": "./tool/release.sh ${nextRelease.version}"
         }
       ],
       [
