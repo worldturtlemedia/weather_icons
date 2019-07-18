@@ -21,14 +21,23 @@ void main() {
     expect(TimeIcon.iconFromDate(date).icon, WeatherIcons.time_3);
   });
 
+  test('should return the correct icon from date at midnight', () {
+    final date2 = DateTime.parse("2000-01-01 00:00:00 Z");
+    expect(TimeIcon.iconFromDate(date2).icon, WeatherIcons.time_12);
+  });
+
+  test('should return the correct icon from date past 12 pm', () {
+    final date2 = DateTime.parse("2000-01-01 15:00:00 Z");
+    expect(TimeIcon.iconFromDate(date2).icon, WeatherIcons.time_3);
+  });
+
   test('should throw if given a negative hour', () {
     expect(() => TimeIcon.fromHour(-42), throwsUnsupportedError);
-    expect(() => TimeIcon.fromHour(0), throwsUnsupportedError);
     expect(() => TimeIcon.fromHour(1), returnsNormally);
   });
 
-  test('should throw if given a hour greater than 12', () {
-    expect(() => TimeIcon.fromHour(12), returnsNormally);
-    expect(() => TimeIcon.fromHour(13), throwsUnsupportedError);
+  test('should throw if given a hour greater than 24', () {
+    expect(() => TimeIcon.fromHour(24), returnsNormally);
+    expect(() => TimeIcon.fromHour(25), throwsUnsupportedError);
   });
 }

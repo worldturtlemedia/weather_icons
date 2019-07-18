@@ -8,14 +8,20 @@ import 'package:weather_icons/weather_icons.dart';
 class TimeIcon {
   /// Get a 'time' [IconData] at a specific [hour].
   ///
-  /// If [hour] is not within 1-12 then a [UnsupportedError] will be thrown.
+  /// If [hour] is midnight (0) then it will return [WeatherICons.time_12].
+  ///
+  /// If [hour] is not within 0-24 then a [UnsupportedError] will be thrown.
   static IconData fromHour(int hour) {
-    final index = hour - 1;
-    if (hour < 1 || hour > 12) {
+    if (hour < 0 || hour > 24) {
       throw UnsupportedError('Unsupported hour $hour');
     }
 
-    return all[index];
+    if (hour == 0) {
+      return WeatherIcons.time_12;
+    }
+
+    final convertedHour = hour > 12 ? hour - 12 : hour;
+    return all[convertedHour - 1];
   }
 
   /// Create a 'time' [Icon] at a specific integer [hour].
