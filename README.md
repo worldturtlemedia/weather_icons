@@ -2,7 +2,7 @@
 
 A Flutter library for using [Weather Icons](https://erikflowers.github.io/weather-icons/).
 
-![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons.svg) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg)
+![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg) [![Coverage Status](https://coveralls.io/repos/github/worldturtlemedia/weather_icons/badge.svg?branch=master)](https://coveralls.io/github/worldturtlemedia/weather_icons?branch=master)
 
 [![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/cyclecheck/api-server.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)
 
