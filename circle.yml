@@ -3,7 +3,7 @@ executors:
   base-executor:
     docker:
       - image: worldturtlemedia/flutter_node:latest
-    working_directory: /project
+    working_directory: /tmp
 
 commands:
   install_node_deps:
@@ -95,9 +95,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /project/example/build/app/outputs/apk/release/
+          at: /tmp/example/build/app/outputs/apk/release/
       - run: |
-          FILE=/project/example/build/app/outputs/apk/release/app-release.apk
+          FILE=/tmp/example/build/app/outputs/apk/release/app-release.apk
           if test -f "$FILE"; then
             echo "Found the apk!";
           else
@@ -114,11 +114,10 @@ workflows:
   build_and_release:
     jobs:
       - build_library
-      - build_sample:
-          requires:
-            - build_library
+      - build_sample
       - release:
           requires:
+            - build_library
             - build_sample
           filters:
             branches:
