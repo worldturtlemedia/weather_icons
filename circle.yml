@@ -102,13 +102,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/example/build/app/outputs/apk/release/
-      - run: |
-          FILE=~/project/example/build/app/outputs/apk/release/app-release.apk
-          if test -f "$FILE"; then
-            echo "Found the apk!";
-          else
-            echo "Unable to find the build sample apk!"; exit 1
-          fi
       - install_node_deps
       - install_flutter_deps
       - run:
