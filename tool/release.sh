@@ -13,7 +13,7 @@ fi
 cd $PARENT
 
 echo "Updating pubspec with new version $1"
-node ./tools/update_version --ver $1
+node ./tool/update_version --ver $1
 retVal=$?
 if [ ! $retVal -eq 0 ]; then
   echo "Failed to update the version!"
