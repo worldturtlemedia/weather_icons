@@ -128,6 +128,10 @@ class WindDirectionDisplay extends StatelessWidget {
 
 A full example can be found in the [example](https://github.com/worldturtlemedia/weather_icons/tree/master/example) folder.
 
+## TODO
+
+- Add support for the weather service mappings [here](https://erikflowers.github.io/weather-icons/api-list.html)
+
 ## Contributing
 
 See [CONTRIBUTING](https://github.com/worldturtlemedia/weather_icons/blob/master/CONTRIBUTING.md)

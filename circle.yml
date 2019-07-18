@@ -1,0 +1,106 @@
+version: 2
+jobs:
+  build_library:
+    docker:
+      - image: worldturtlemedia/flutter_node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - restore_cache:
+          name: Restore Flutter Package Cache
+          keys:
+            - flutter-packages-{{ checksum "pubspec.lock" }}
+      - run:
+          name: Get Flutter Dependencies
+          command: flutter pub get
+      - save_cache:
+          name: Save Flutter Package Cache
+          key: flutter-packages-{{ checksum "pubspec.lock" }}
+          paths:
+            - ~/.pub-cache
+      - run:
+          name: Lint all source files
+          command: yarn lint
+      - run:
+          name: Run all the tests
+          command: yarn test --coverage
+      - run:
+          name: Report coverage
+          command: yarn report-coverage
+      - store_artifacts:
+          path: ./lib
+          destination: lib
+  build_sample:
+    docker:
+      - image: worldturtlemedia/flutter_node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Library Flutter Package Cache
+          keys:
+            - flutter-packages-{{ checksum "pubspec.lock" }}
+      - run:
+          name: Get Library Flutter Dependencies
+          command: flutter pub get
+      - restore_cache:
+          name: Restore Android dependencies
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - run:
+          name: Build sample APK
+          command: cd example && flutter build apk
+      - save_cache:
+          name: Save Android dependencies
+          key: jars-{{ checksum "example/android/build.gradle" }}
+          paths:
+            - ~/.gradle
+      - store_artifacts:
+          path: example/build/app/outputs/apk/release
+          destination: outputs
+  release:
+    docker:
+      - image: worldturtlemedia/flutter_node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - restore_cache:
+          name: Restore Flutter Package Cache
+          keys:
+            - flutter-packages-{{ checksum "pubspec.lock" }}
+      - run:
+          name: Get Flutter Dependencies
+          command: flutter pub get
+      - run:
+          name: Publish if update is required
+          command: yarn semantic-release
+
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - build_library
+      - build_sample:
+          requires:
+            - build_library
+      - release:
+          requires:
+            - build_sample
+          filters:
+            branches:
+              only: master

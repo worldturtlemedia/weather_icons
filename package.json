@@ -1,7 +1,7 @@
 {
   "name": "weather_icons",
   "version": "0.0.0",
-  "description": "Wrapper for weather-icons",
+  "description": "Flutter library for using erikflowers/weather-icons",
   "main": "index.js",
   "repository": "https://github.com/worldturtlemedia/weather_icons",
   "author": "WorldTurtleMedia <jordon.dehoog@gmail.com>",
@@ -10,12 +10,14 @@
   "scripts": {
     "commit": "git-cz",
     "test": "flutter test",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "format": "flutter format lib test",
     "lint": "flutter analyze && npm run format -- --set-exit-if-changed",
     "download": "node tool/download_font",
     "generate": "node tool/scrape_icons -o ./lib/src",
     "sync": "npm run download && npm run generate",
-    "pub:dry": "flutter pub pub publish --dry-run"
+    "pub:dry": "flutter pub pub publish --dry-run",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@octokit/rest": "^16.28.4",
@@ -57,6 +59,19 @@
       "git add"
     ]
   },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false
+  },
+  "renovate": {
+    "extends": ["config:base"],
+    "automerge": true,
+    "baseBranches": ["next"],
+    "major": {
+      "automerge": false
+    }
+  },
   "release": {
     "branch": "master",
     "plugins": [
@@ -79,7 +94,6 @@
         "@semantic-release/github",
         {
           "assets": [
-            "packages/*.zip",
             "CHANGELOG.md"
           ]
         }
