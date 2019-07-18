@@ -6,7 +6,7 @@ executors:
     working_directory: /project
 
 commands:
-  installNodeDeps:
+  install_node_deps:
     description: 'Install node dependencies from the cache, and save the cache'
     steps:
       - restore_cache:
@@ -20,7 +20,7 @@ commands:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           path: ~/.cache/yarn
 
-  installFlutterDeps:
+  install_flutter_deps:
     description: 'Install flutter dependencies from the cache, and save the cache'
     steps:
       - restore_cache:
@@ -34,14 +34,14 @@ commands:
           key: flutter-packages-{{ checksum "pubspec.lock" }}
           path: ~/.pub-cache
 
-  restoreAndroidDeps:
+  restore_android_deps:
     description: 'Restore the Android deps from cache'
     steps:
       - restore_cache:
           name: Restore Android dependencies
           key: jars-{{ checksum "example/android/build.gradle" }}
 
-  saveAndroidDeps:
+  save_android_deps:
     description: 'Save the Android deps to the cache'
     steps:
       - save_cache:
@@ -54,8 +54,8 @@ jobs:
     executor: base-executor
     steps:
       - checkout
-      - installNodeDeps
-      - installFlutterDeps
+      - install_node_deps
+      - install_flutter_deps
       - run:
           name: Lint all source files
           command: yarn lint
@@ -73,12 +73,12 @@ jobs:
     executor: base-executor
     steps:
       - checkout
-      - installFlutterDeps
-      - restoreAndroidDeps
+      - install_flutter_deps
+      - restore_android_deps
       - run:
           name: Build sample APK
           command: cd example && flutter build apk
-      - saveAndroidDeps
+      - save_android_deps
       - persist_to_workspace:
           root: example/build/app/outputs/apk/release/
           paths:
@@ -100,8 +100,8 @@ jobs:
           else
             echo "Unable to find the build sample apk!"; exit 1
           fi
-      - installNodeDeps
-      - installFlutterDeps
+      - install_node_deps
+      - install_flutter_deps
       - run:
           name: Publish if update is required
           command: yarn semantic-release
