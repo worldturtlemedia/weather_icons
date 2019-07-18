@@ -30,7 +30,7 @@ import 'package:weather_icons/weather_icons.dart';
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(WeatherIcons.wiDaySunny),
+      icon: Icon(WeatherIcons.day_sunny),
       onPressed: () {
           print("Foo");
       }

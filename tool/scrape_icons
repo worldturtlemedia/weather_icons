@@ -241,8 +241,7 @@ function generateTestFile(iconData, version, date) {
     .map(title => {
       return `
   testWidgets('create WeatherIcons.${title}', (t) async {
-    await _p(t, WeatherIcons.${title});
-    _e(WeatherIcons.${title});
+    await _test(t, WeatherIcons.${title});
   });`.trim()
     })
 
@@ -255,15 +254,11 @@ import 'package:weather_icons/weather_icons.dart';
 
 import 'util/test_widget.dart';
 
-/// Shorthand function for pumping the widget.
+/// Shorthand function for testing the icon.
+///
 /// Used to save space in generated file.
-_p(WidgetTester t, IconData icon) async {
+_test(WidgetTester t, IconData icon) async {
   await t.pumpWidget(TestWidget(child: Icon(icon)));
-}
-
-/// Shorthand function for making the assertion.
-/// Used to save space in generated file.
-_e(IconData icon) {
   expect(find.byIcon(icon), findsOneWidget);
 }
 
