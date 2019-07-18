@@ -180,17 +180,18 @@ class WeatherIcons {
   ${icons.join('\n\n  ')}
 
   /// Get the matching [IconData] from the WeatherIcon name.
-  /// Pass in a [fallback] or else it will throw.
+  ///
+  /// If you do not pass in a [fallback] then it will throw if it cannot find the icon.
   ///
   /// See [WeatherIcons](https://erikflowers.github.io/weather-icons/) for more info.
   ///
   /// Sample Usage:
   ///
   ///     IconButton(
-  ///       icon: new Icon(WeatherIcons.fromName('wi-day-sunny')),
+  ///       icon: new Icon(WeatherIcons.fromString('wi-day-sunny')),
   ///       onPressed: () { print("Hello World"); }
   ///     );
-  static IconData fromName(
+  static IconData fromString(
     String name, {
     IconData fallback,
   }) {

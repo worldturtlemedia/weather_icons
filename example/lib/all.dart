@@ -21,7 +21,7 @@ class AllScreen extends StatelessWidget {
 
   List<Widget> _createIconList(BuildContext context) {
     return WeatherIconsUtil.iconMap.keys.map((name) {
-      final icon = WeatherIcons.fromName(name);
+      final icon = WeatherIcons.fromString(name);
 
       return GridTile(
         child: Container(

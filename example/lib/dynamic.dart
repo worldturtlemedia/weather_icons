@@ -48,7 +48,7 @@ class _DynamicScreenState extends State<DynamicScreen> {
 
   Widget _buildResult(BuildContext context) {
     try {
-      final icon = WeatherIcons.fromName(_searchTerm);
+      final icon = WeatherIcons.fromString(_searchTerm);
 
       return Container(
         padding: EdgeInsets.only(top: 32),
