@@ -105,11 +105,8 @@ jobs:
       - install_node_deps
       - install_flutter_deps
       - run:
-          name: Prepare release
+          name: Prepare release and deploy
           command: yarn semantic-release
-      - run:
-          name: Publish if required
-          command: ./tool/publish.sh
 
 workflows:
   version: 2.1
