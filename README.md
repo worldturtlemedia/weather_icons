@@ -113,7 +113,7 @@ class WindDirectionDisplay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          WindIcon(angle: windDirectionDegree),
+          WindIcon(degree: windDirectionDegree),
           Text("Icon for wind @ $windDirectionDegree°"),
         ],
       ),
@@ -122,7 +122,7 @@ class WindDirectionDisplay extends StatelessWidget {
 }
 ```
 
-**Note:** The angle is in degrees of a compass/circle, so 0-360.
+**Note:** The degree must be within the degrees of a compass/circle, so 0-360.
 
 ## Time icons
 

@@ -14,15 +14,15 @@
 ///
 /// Example Wind usage:
 ///
-///     // Using a preset angle
+///     // Using a preset degree
 ///     IconButton(
 ///       icon: WindIcon.towards_ne,
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
-///     // Using a custom angle between 0-360
+///     // Using a custom degree between 0-360
 ///     IconButton(
-///       icon: WindIcon(angle: 45),
+///       icon: WindIcon(degree: 45),
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
@@ -55,3 +55,4 @@ library weather_icons;
 export 'package:weather_icons/src/time_icon.dart';
 export 'package:weather_icons/src/weather_icons_g.dart';
 export 'package:weather_icons/src/wind_icon.dart';
+export 'package:weather_icons/src/boxed_icon.dart';

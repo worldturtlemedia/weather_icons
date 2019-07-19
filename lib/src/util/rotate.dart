@@ -2,16 +2,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-/// Rotates the [child] by the [angle] degrees.
+/// Rotates the [child] by the [degree] degrees.
 class Rotate extends StatelessWidget {
-  final double angle;
+  final double degree;
   final Widget child;
+  final Alignment alignment;
 
   const Rotate({
     Key key,
-    @required this.angle,
+    @required this.degree,
     @required this.child,
-  })  : assert(angle != null),
+    this.alignment = Alignment.center,
+  })  : assert(degree != null),
         assert(child != null),
         super(
           key: key,
@@ -20,7 +22,8 @@ class Rotate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
-      angle: -pi / angle,
+      angle: degree * pi / 180,
+      alignment: alignment,
       child: child,
     );
   }

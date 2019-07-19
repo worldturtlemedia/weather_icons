@@ -1,6 +1,5 @@
 class WeatherIconsUtil {
-  static const String version = "2.0.10";
-  static const double dateTimestamp = 1563463270213;
+  static const double dateTimestamp = 1563577764979;
 
   static const Map<String, int> iconMap = {
     'wi-day-sunny': 0xf00d,
@@ -223,5 +222,13 @@ class WeatherIconsUtil {
     'wi-wind-beaufort-11': 0xf0c2,
     'wi-wind-beaufort-12': 0xf0c3,
     'wind': 0xf0b1,
+    'wind-deg-0': 0xf05c,
+    'wind-deg-45': 0xf05a,
+    'wind-deg-90': 0xf059,
+    'wind-deg-135': 0xf05d,
+    'wind-deg-180': 0xf060,
+    'wind-deg-225': 0xf05e,
+    'wind-deg-270': 0xf061,
+    'wind-deg-315': 0xf05b,
   };
 }
