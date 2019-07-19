@@ -1,5 +1,6 @@
 credentials.json
 do_release
+.prettierrc
 
 # Miscellaneous
 *.class
