@@ -124,6 +124,36 @@ class WindDirectionDisplay extends StatelessWidget {
 
 **Note:** The angle is in degrees of a compass/circle, so 0-360.
 
+## Time icons
+
+`weather_icons` also includes a helper for displaying the time icons.
+
+```dart
+// Manual hour
+IconButton(
+  icon: TimeIcon.iconFromHour(3),
+  onPressed: () { print("Displaying the third hour!"); }
+);
+
+// Using a DateTime instance
+IconButton(
+  icon: TimeIcon.iconFromDate(DateTime.now()),
+  onPressed: () { print("Current hour"); }
+);
+
+// Creating your own Icon
+Icon(
+  icon: TimeIcon.fromHour(3),
+  size: 60,
+)
+
+// Also using a DateTime
+Icon(
+  icon: TimeIcon.fromDate(DateTime.now()),
+  size: 60,
+)
+```
+
 ## Example
 
 A full example can be found in the [example](https://github.com/worldturtlemedia/weather_icons/tree/master/example) folder.
