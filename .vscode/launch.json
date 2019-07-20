@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+  {
+      "name": "Weather Icons Example",
+      "request": "launch",
+      "type": "dart",
+      "program": "${workspaceRoot}/example/lib/main.dart"
+    }
+  ]
+}

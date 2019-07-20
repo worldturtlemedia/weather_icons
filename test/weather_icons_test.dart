@@ -31,7 +31,7 @@ void main() {
     final child = TestWidget(child: Icon(WeatherIcons.cloud));
     final rotated = Rotate(
       child: child,
-      angle: 100,
+      degree: 100,
     );
     await t.pumpWidget(rotated);
 
@@ -40,9 +40,9 @@ void main() {
 
   test('should throw on null constructor params', () {
     expect(
-      () => Rotate(angle: null, child: Placeholder()),
+      () => Rotate(degree: null, child: Placeholder()),
       throwsAssertionError,
     );
-    expect(() => Rotate(angle: 42, child: null), throwsAssertionError);
+    expect(() => Rotate(degree: 42, child: null), throwsAssertionError);
   });
 }

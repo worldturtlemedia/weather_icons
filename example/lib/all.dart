@@ -4,11 +4,18 @@ import 'package:weather_icons/weather_icons.dart';
 import 'util.dart';
 
 class AllScreen extends StatelessWidget {
+  final bool isBoxed;
+
+  AllScreen({
+    this.isBoxed = false,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("All Icons"),
+        title: Text(
+            isBoxed ? "All Icons using BoxedIcon()" : "All Icons using Icon()"),
       ),
       body: GridView.count(
         crossAxisCount: 3,
@@ -33,15 +40,24 @@ class AllScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 23),
-                  child: Icon(
-                    icon,
-                    size: 50,
-                    color: Colors.white,
+                  padding: const EdgeInsets.only(bottom: 0),
+                  child: Container(
+                    color: Colors.blueAccent,
+                    child: isBoxed
+                        ? BoxedIcon(
+                            icon,
+                            size: 50,
+                            color: Colors.white,
+                          )
+                        : Icon(
+                            icon,
+                            size: 50,
+                            color: Colors.white,
+                          ),
                   ),
                 ),
                 Text(
-                  "'$name'",
+                  "${name.replaceAll('-', '_')}",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 ),

@@ -26,9 +26,12 @@ class _TimeScreenState extends State<TimeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 32, bottom: 48),
-              child: Icon(
-                TimeIcon.fromHour(_hour),
-                size: 100,
+              child: Container(
+                color: Colors.amber,
+                child: BoxedIcon(
+                  TimeIcon.fromHour(_hour),
+                  size: 100,
+                ),
               ),
             ),
             Row(

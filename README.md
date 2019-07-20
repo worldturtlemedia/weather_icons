@@ -2,9 +2,9 @@
 
 A Flutter library for using [Weather Icons](https://erikflowers.github.io/weather-icons/).
 
-![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg) [![Coverage Status](https://coveralls.io/repos/github/worldturtlemedia/weather_icons/badge.svg?branch=master)](https://coveralls.io/github/worldturtlemedia/weather_icons?branch=master)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/worldturtlemedia/weather_icons/master.svg?label=release%20build)](https://circleci.com/gh/worldturtlemedia/weather_icons) ![GitHub](https://img.shields.io/github/license/worldturtlemedia/weather_icons.svg) [![Coverage Status](https://coveralls.io/repos/github/worldturtlemedia/weather_icons/badge.svg?branch=master)](https://coveralls.io/github/worldturtlemedia/weather_icons?branch=master)
 
-[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) ![GitHub release](https://img.shields.io/github/release/worldturtlemedia/weather_icons.svg?label=gh-release) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)
+[![Pub](https://img.shields.io/pub/v/weather_icons.svg?style=flat-square)](https://pub.dartlang.org/packages/weather_icons) [![GitHub release](https://img.shields.io/github/release/worldturtlemedia/weather_icons.svg?label=gh-release)](https://github.com/worldturtlemedia/weather_icons/releases) [![GitHub commits since latest release](https://img.shields.io/github/commits-since/worldturtlemedia/weather_icons/latest/master.svg)](https://github.com/worldturtlemedia/weather_icons/commits/master)
 
 **Note:** All of the icon data is auto-generated based on the latest release of [Weather Icons](https://github.com/erikflowers/weather-icons/releases).
 
@@ -29,11 +29,32 @@ import 'package:weather_icons/weather_icons.dart';
 
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(WeatherIcons.day_sunny),
+    return Icon(
+      icon: BoxedIcon(WeatherIcons.day_sunny),
       onPressed: () {
           print("Foo");
       }
+     );
+  }
+}
+```
+
+### Note
+
+Because of how the icons exist in the font file, there will be some display issues when using a standard `Icon` widget. The icon will draw outside of its boundaries causing issues with layouts and padding, etc.
+
+You can see an example of this in the `example/` application.
+
+In order to overcome this, the library exposes a widget called `BoxedIcon`. Which puts the icon into a 'box' which properly sets its height, and width. Preventing any of the out of boundary drawing.
+
+Anywhere you can use `Icon`, you can swap it out for `BoxedIcon`.
+
+```dart
+class MyWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Icon(
+      icon: BoxedIcon(WeatherIcons.day_sunny),
+      onPressed: () {}
      );
   }
 }
@@ -58,7 +79,7 @@ class WeatherDisplay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Icon(
+          BoxedIcon(
             WeatherIcons.fromString(
                 weatherCode,
                 // Fallback is optional, throws if not found, and not supplied.
@@ -76,6 +97,8 @@ class WeatherDisplay extends StatelessWidget {
 ### Wind Direction
 
 The wind icon is a special icon, as it is one single icon value that is then rotated using CSS. To achieve a similar functionality you can use the `WindIcon` class.
+
+The `WindIcon`'s always use `BoxedIcon`.
 
 **Note:** This means that `WeatherIcons.wind` will always be the North facing icon.
 
@@ -113,7 +136,7 @@ class WindDirectionDisplay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          WindIcon(angle: windDirectionDegree),
+          WindIcon(degree: windDirectionDegree),
           Text("Icon for wind @ $windDirectionDegree°"),
         ],
       ),
@@ -122,7 +145,7 @@ class WindDirectionDisplay extends StatelessWidget {
 }
 ```
 
-**Note:** The angle is in degrees of a compass/circle, so 0-360.
+**Note:** The degree must be within the degrees of a compass/circle, so 0-360.
 
 ## Time icons
 
@@ -131,24 +154,24 @@ class WindDirectionDisplay extends StatelessWidget {
 ```dart
 // Manual hour
 IconButton(
-  icon: TimeIcon.iconFromHour(3),
+  icon: BoxedIcon(TimeIcon.iconFromHour(3)),
   onPressed: () { print("Displaying the third hour!"); }
 );
 
 // Using a DateTime instance
 IconButton(
-  icon: TimeIcon.iconFromDate(DateTime.now()),
+  icon: BoxedIcon(TimeIcon.iconFromDate(DateTime.now())),
   onPressed: () { print("Current hour"); }
 );
 
 // Creating your own Icon
-Icon(
+BoxedIcon(
   icon: TimeIcon.fromHour(3),
   size: 60,
 )
 
 // Also using a DateTime
-Icon(
+BoxedIcon(
   icon: TimeIcon.fromDate(DateTime.now()),
   size: 60,
 )

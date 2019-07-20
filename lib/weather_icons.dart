@@ -5,24 +5,33 @@
 ///
 /// Example:
 ///
+///     // Using the regular Icon can have some display issues
 ///     IconButton(
 ///       icon: Icon(WeatherIcons.rain),
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
+///     // Try using BoxedIcon to properly set its bounds
+///     IconButton(
+///       icon: BoxedIcon(WeatherIcons.rain),
+///       onPressed: () { print("Hello World"); }
+///     );
+///
 /// [WindIcon] is a helper widget for creating a rotated wind symbol.
+///
+/// **Note:** [WindIcon] automatically uses the [BoxedIcon] widget.
 ///
 /// Example Wind usage:
 ///
-///     // Using a preset angle
+///     // Using a preset degree
 ///     IconButton(
 ///       icon: WindIcon.towards_ne,
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
-///     // Using a custom angle between 0-360
+///     // Using a custom degree between 0-360
 ///     IconButton(
-///       icon: WindIcon(angle: 45),
+///       icon: WindIcon(degree: 45),
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
@@ -32,19 +41,19 @@
 ///
 ///     // Manual hour
 ///     IconButton(
-///       icon: TimeIcon.iconFromHour(3),
+///       icon: Icon(TimeIcon.iconFromHour(3)),
 ///       onPressed: () { print("Displaying the third hour!"); }
 ///     );
 ///
 ///     // Using a [DateTime] instance
 ///     IconButton(
-///       icon: TimeIcon.iconFromDate(DateTime()),
+///       icon: Icon(TimeIcon.iconFromDate(DateTime())),
 ///       onPressed: () { print("Current hour"); }
 ///     );
 ///
 ///     // Creating your own [Icon]
 ///     Icon(
-///       icon: TimeIcon.fromHour(3),
+///       icon: Icon(TimeIcon.fromHour(3)),
 ///       size: 60,
 ///     )
 ///
@@ -55,3 +64,4 @@ library weather_icons;
 export 'package:weather_icons/src/time_icon.dart';
 export 'package:weather_icons/src/weather_icons_g.dart';
 export 'package:weather_icons/src/wind_icon.dart';
+export 'package:weather_icons/src/boxed_icon.dart';

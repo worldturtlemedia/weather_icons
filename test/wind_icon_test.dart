@@ -6,20 +6,23 @@ import 'package:weather_icons/weather_icons.dart';
 import 'util/test_widget.dart';
 
 void main() {
-  test('should not accept a null angle', () {
-    expect(() => WindIcon(angle: null), throwsAssertionError);
+  test('should not accept a null degree', () {
+    expect(() => WindIcon(degree: null), throwsAssertionError);
   });
 
-  test('should throw on an invalid angle', () {
-    expect(() => WindIcon(angle: -5), throwsAssertionError);
-    expect(() => WindIcon(angle: 0), returnsNormally);
-    expect(() => WindIcon(angle: 360), returnsNormally);
-    expect(() => WindIcon(angle: 400), throwsAssertionError);
+  test('should throw on an invalid degree', () {
+    expect(() => WindIcon(degree: -5), throwsAssertionError);
+    expect(() => WindIcon(degree: 0), returnsNormally);
+    expect(() => WindIcon(degree: 360), returnsNormally);
+    expect(() => WindIcon(degree: 400), throwsAssertionError);
   });
 
   testWidgets('should create a wind icon', (tester) async {
     await tester.pumpWidget(TestWidget(child: WindIcon.towards_n));
-    expect(find.byIcon(WeatherIcons.wind), findsOneWidget);
+    final degree =
+        (find.byType(Rotate).evaluate().first.widget as Rotate).degree;
+    expect(find.byType(WindIcon), findsOneWidget);
+    expect(degree, 0);
   });
 
   _testIcon(WidgetTester tester, WindIcon actual, double expected) async {
@@ -27,7 +30,7 @@ void main() {
       TestWidget(child: actual),
     );
     expect(
-      (find.byType(Rotate).evaluate().first.widget as Rotate).angle,
+      (find.byType(Rotate).evaluate().first.widget as Rotate).degree,
       expected,
     );
   }

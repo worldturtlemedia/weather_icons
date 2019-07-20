@@ -5,40 +5,27 @@ const { resolve, join, dirname } = require('path')
 
 const request = require('request')
 const Zip = require('adm-zip')
-const {
-  ensureDir,
-  createWriteStream,
-  unlink,
-  remove,
-  outputJson,
-} = require('fs-extra')
-const Octokit = require('@octokit/rest')()
-const semver = require('semver')
+const { ensureDir, createWriteStream, unlink, remove } = require('fs-extra')
 const yargs = require('yargs')
-
-const { checkLocalVersion, genVersionPath } = require('./util')
 
 const args = yargs.option('c', { alias: 'clean', default: true }).argv
 
 const DEFAULT_DOWNLOAD_DIR = tmpdir()
 const DOWNLOAD_FILENAME = 'weather_icons.zip'
 const DEFAULT_OUTPUT_DIR = resolve(__dirname, '../lib/fonts')
-const GH_INFO = { owner: 'erikflowers', repo: 'weather-icons' }
-const DOWNLOAD_URL = 'https://github.com/erikflowers/weather-icons/archive/'
+const DOWNLOAD_URL =
+  'https://github.com/erikflowers/weather-icons/archive/master.zip'
 
 const verbose = args.v || args.verbose || false
+const downloadURL = args.u || args.url || DOWNLOAD_URL
 const downloadDir = resolve(args.d || args.download || DEFAULT_DOWNLOAD_DIR)
 const output = resolve(args.o || args.output || DEFAULT_OUTPUT_DIR)
-const force = args.f || args.force
 const clean = args.c
 
 const log = require('./util').createLogger(verbose)
 
-const versionPath = genVersionPath(resolve(__dirname, '..'))
 const downloadFolder = join(downloadDir, 'weather_icons')
 const downloadPath = join(downloadFolder, DOWNLOAD_FILENAME)
-
-const genUrl = version => `${DOWNLOAD_URL}${version}.zip`
 
 if (args.h || args.help) return printUsage()
 
@@ -49,35 +36,13 @@ start().catch(err => {
 
 async function start() {
   log.i('WeatherIcons downloader')
+  log.v(`Download URL : ${downloadURL}`)
   log.v(`Download dir : ${downloadFolder}`)
   log.v(`Download file: ${downloadPath}`)
   log.v(`Output dir   : ${output}`)
-  log.v(`Version path : ${versionPath}`)
   log.v(`Clean        : ${clean}`)
-  log.v(`Force        : ${force}`)
 
-  const remote = await checkRemoteVersion()
-
-  if (!force) {
-    const local = await checkLocalVersion(versionPath, verbose)
-
-    if (local === undefined) {
-      log.i(`Local version not found, downloading latest release: v${remote}`)
-    } else if (semver.gt(remote, local)) {
-      log.i(`Update is required: v${remote}`)
-      if (verbose) {
-        const diff = semver.diff(remote, local)
-        log.v(`Version: ${local} -> ${remote} => ${diff}`)
-      }
-    } else {
-      log.i(`No update is required.`)
-      return
-    }
-  } else {
-    log.i('Force mode is enabled, ignoring local version check.')
-  }
-
-  await downloadVersion(remote)
+  await downloadVersion()
   await unzipDownload()
 
   if (clean) {
@@ -92,40 +57,11 @@ async function start() {
       process.exit(1)
     }
   }
-
-  await saveLocalVersion(remote)
 }
 
-async function checkRemoteVersion() {
+async function downloadVersion() {
   try {
-    log.i('Checking remote version')
-    log.v(`Repo info: owner: ${GH_INFO.owner}, repo: ${GH_INFO.repo}`)
-
-    const { data } = await Octokit.repos.getLatestRelease(GH_INFO)
-    if (!data) throw Error('Data was null!')
-    const remote = {
-      version: data.tag_name,
-      description: data.name,
-      created: data.created_at,
-    }
-
-    log.v(`Latest version:`)
-    log.v(`\tVersion     -> ${remote.version}`)
-    log.v(`\tDescription -> ${remote.description}`)
-    log.v(`\tCreated     -> ${remote.created}`)
-
-    return remote.version
-  } catch (error) {
-    console.error('Unable to check remote version!')
-    console.error(error)
-    process.exit(1)
-  }
-}
-
-async function downloadVersion(version) {
-  const url = genUrl(version)
-  try {
-    await download(url, downloadPath)
+    await download(downloadURL, downloadPath)
   } catch (error) {
     console.error(`Unable to download ${url}`)
     console.error(error)
@@ -161,25 +97,6 @@ async function unzipDownload() {
   return true
 }
 
-async function saveLocalVersion(version) {
-  const output = {
-    version,
-    downloadedAt: new Date(),
-  }
-
-  log.i(`Writing current version: ${version}`)
-  log.v(`To: ${versionPath}`)
-
-  try {
-    await outputJson(versionPath, output, { spaces: 2 })
-    log.i('Wrote version.')
-  } catch (error) {
-    console.error('Unable to save version!')
-    console.error(error)
-    process.exit(1)
-  }
-}
-
 async function download(url, dest) {
   log.i(`Downloading: ${url}`)
   log.v(`To: ${dest}`)
@@ -199,15 +116,16 @@ async function download(url, dest) {
 
 function printUsage() {
   log.i(
-    `Usage: download_font [options]
+    `Usage: ${__filename} [options]
 
   Download font files for erikflowers/weather-icons.
 
   Options:
 
     --help     -h  Print this usage message
+    --url      -u  Download URL for the font zip
+      (default: ${downloadURL})
     --verbose  -v  Log extra information to stdout             (default: false)
-    --force    -f  Ignore the local version check              (default: false)
     --download -d  Directory to download temporary files       (default: /tmp)
     --output   -o  Directory to place the font files           (default: ./lib/fonts)
     --clean    -c  Clean up the temporary files                (default: true)

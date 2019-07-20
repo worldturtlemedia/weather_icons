@@ -64,7 +64,7 @@ async function writePubspec(pubspec) {
 
 function printUsage() {
   log.i(
-    `Usage: publish --version <version> [options]
+    `Usage: ${__filename} --version <version> [options]
 
   Publish new version of weather_icons to pub.dev.
 

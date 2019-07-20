@@ -21,8 +21,5 @@ flutter run
 ## TODO
 
 - Showcase
-  - All icon display
-  - Name to icon
-  - Time icon
   - Wind direction
 - Add to play store
