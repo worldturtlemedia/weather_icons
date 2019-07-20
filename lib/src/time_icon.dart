@@ -24,20 +24,8 @@ class TimeIcon {
     return all[convertedHour - 1];
   }
 
-  /// Create a 'time' [Icon] at a specific integer [hour].
-  ///
-  /// Pass false for [boxed] if you don't want the icon to be boxed.
-  static Icon iconFromHour(int hour, {bool boxed = true}) =>
-      boxed ? BoxedIcon(fromHour(hour)) : Icon(fromHour(hour));
-
   /// Get the 'time' [IconData] at a specific time using the [dateTime].
   static IconData fromDate(DateTime dateTime) => fromHour(dateTime.hour);
-
-  /// Create a 'time' [Icon] at a specific time using the [dateTime].
-  ///
-  /// Pass false for [boxed] if you don't want the icon to be boxed.
-  static Icon iconFromDate(DateTime dateTime, {bool boxed = true}) =>
-      iconFromHour(dateTime.hour, boxed: boxed);
 
   /// A list of all of the 'time' [WeatherIcons].
   static const List<IconData> all = [

@@ -10,7 +10,7 @@ void main() {
   });
 
   test('should return the correct icon from hour int', () {
-    expect(TimeIcon.iconFromHour(5).icon, WeatherIcons.time_5);
+    expect(TimeIcon.fromHour(5), WeatherIcons.time_5);
   });
 
   test('should return the correct icon data from date', () {
@@ -18,17 +18,17 @@ void main() {
   });
 
   test('should return the correct icon from date', () {
-    expect(TimeIcon.iconFromDate(date).icon, WeatherIcons.time_3);
+    expect(TimeIcon.fromDate(date), WeatherIcons.time_3);
   });
 
   test('should return the correct icon from date at midnight', () {
     final date2 = DateTime.parse("2000-01-01 00:00:00 Z");
-    expect(TimeIcon.iconFromDate(date2).icon, WeatherIcons.time_12);
+    expect(TimeIcon.fromDate(date2), WeatherIcons.time_12);
   });
 
   test('should return the correct icon from date past 12 pm', () {
     final date2 = DateTime.parse("2000-01-01 15:00:00 Z");
-    expect(TimeIcon.iconFromDate(date2).icon, WeatherIcons.time_3);
+    expect(TimeIcon.fromDate(date2), WeatherIcons.time_3);
   });
 
   test('should throw if given a negative hour', () {

@@ -19,7 +19,10 @@ void main() {
 
   testWidgets('should create a wind icon', (tester) async {
     await tester.pumpWidget(TestWidget(child: WindIcon.towards_n));
-    expect(find.byIcon(WeatherIcons.wind), findsOneWidget);
+    final degree =
+        (find.byType(Rotate).evaluate().first.widget as Rotate).degree;
+    expect(find.byType(WindIcon), findsOneWidget);
+    expect(degree, 0);
   });
 
   _testIcon(WidgetTester tester, WindIcon actual, double expected) async {
