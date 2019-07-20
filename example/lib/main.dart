@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:weather_icons/weather_icons.dart';
+import 'package:weather_icons_example/util.dart';
+
 import 'all.dart';
 import 'dynamic.dart';
 import 'time.dart';
@@ -18,6 +21,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       routes: {
         "all": (context) => AllScreen(),
+        "all-boxed": (context) => AllScreen(isBoxed: true),
         "dynamic": (context) => DynamicScreen(),
         "time": (context) => TimeScreen(),
         "wind": (context) => WindScreen(),
@@ -37,9 +41,20 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Click both of the 'All Icons' buttons to see the difference between using BoxedIcon vs Icon",
+                textAlign: TextAlign.center,
+              ),
+            ),
             RaisedButton(
-              child: Text("All icons"),
+              child: Text("All icons (Regular Icon())"),
               onPressed: () => _navigate(context, "all"),
+            ),
+            RaisedButton(
+              child: Text("All icons (BoxedIcon())"),
+              onPressed: () => _navigate(context, "all-boxed"),
             ),
             RaisedButton(
               child: Text("Dynamic icon"),
@@ -53,6 +68,17 @@ class MyHomePage extends StatelessWidget {
               child: Text("Wind icons"),
               onPressed: () => _navigate(context, "wind"),
             ),
+            IconButton(
+              icon: BoxedIcon(WeatherIcons.day_cloudy_gusts),
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Text(
+                "Fonts generated at: ${DateTime.fromMillisecondsSinceEpoch(WeatherIconsUtil.dateTimestamp)}",
+                textAlign: TextAlign.center,
+              ),
+            )
           ],
         ),
       ),

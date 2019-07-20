@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:weather_icons/weather_icons.dart';
+
 import 'package:weather_icons/src/util/rotate.dart';
-import 'package:weather_icons/src/weather_icons_g.dart';
 
 /// Create a rotated 'wind' [Icon] using an [degree] between 0-360.
 ///
@@ -20,7 +21,7 @@ import 'package:weather_icons/src/weather_icons_g.dart';
 ///       icon: WindIcon.towards_ne,
 ///       onPressed: () { }
 ///     );
-class WindIcon extends Icon {
+class WindIcon extends BoxedIcon {
   final double degree;
 
   const WindIcon({
@@ -28,8 +29,6 @@ class WindIcon extends Icon {
     Key key,
     double size,
     Color color,
-    String semanticLabel,
-    TextDirection textDirection,
   })  : assert(degree != null),
         assert(degree >= 0 && degree <= 360),
         super(
@@ -37,8 +36,6 @@ class WindIcon extends Icon {
           key: key,
           size: size,
           color: color,
-          semanticLabel: semanticLabel,
-          textDirection: textDirection,
         );
 
   @override
@@ -46,7 +43,6 @@ class WindIcon extends Icon {
     return Container(
       child: Rotate(
         degree: degree,
-        alignment: Alignment.lerp(Alignment.topCenter, Alignment.center, 1.45),
         child: super.build(context),
       ),
     );

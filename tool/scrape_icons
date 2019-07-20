@@ -219,7 +219,7 @@ function genExampleIconMap(iconData, date) {
 
   return `
 class WeatherIconsUtil {
-  static const double dateTimestamp = ${date.getTime()};
+  static const int dateTimestamp = ${date.getTime()};
 
   static const Map<String, int> iconMap = {
     ${iconMap.join('\n    ')}
