@@ -5,12 +5,21 @@
 ///
 /// Example:
 ///
+///     // Using the regular Icon can have some display issues
 ///     IconButton(
 ///       icon: Icon(WeatherIcons.rain),
 ///       onPressed: () { print("Hello World"); }
 ///     );
 ///
+///     // Try using BoxedIcon to properly set its bounds
+///     IconButton(
+///       icon: BoxedIcon(WeatherIcons.rain),
+///       onPressed: () { print("Hello World"); }
+///     );
+///
 /// [WindIcon] is a helper widget for creating a rotated wind symbol.
+///
+/// **Note:** [WindIcon] automatically uses the [BoxedIcon] widget.
 ///
 /// Example Wind usage:
 ///
@@ -32,19 +41,19 @@
 ///
 ///     // Manual hour
 ///     IconButton(
-///       icon: TimeIcon.iconFromHour(3),
+///       icon: Icon(TimeIcon.iconFromHour(3)),
 ///       onPressed: () { print("Displaying the third hour!"); }
 ///     );
 ///
 ///     // Using a [DateTime] instance
 ///     IconButton(
-///       icon: TimeIcon.iconFromDate(DateTime()),
+///       icon: Icon(TimeIcon.iconFromDate(DateTime())),
 ///       onPressed: () { print("Current hour"); }
 ///     );
 ///
 ///     // Creating your own [Icon]
 ///     Icon(
-///       icon: TimeIcon.fromHour(3),
+///       icon: Icon(TimeIcon.fromHour(3)),
 ///       size: 60,
 ///     )
 ///

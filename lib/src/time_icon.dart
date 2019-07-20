@@ -4,6 +4,8 @@ import 'package:weather_icons/weather_icons.dart';
 
 /// Collection of helper functions for getting a time icon.
 ///
+/// Consider using [BoxedIcon] to display the time icon.
+///
 /// See [erikflowers/WeatherIcons](https://erikflowers.github.io/weather-icons/).
 class TimeIcon {
   /// Get a 'time' [IconData] at a specific [hour].

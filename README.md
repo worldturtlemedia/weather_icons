@@ -29,11 +29,32 @@ import 'package:weather_icons/weather_icons.dart';
 
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(WeatherIcons.day_sunny),
+    return Icon(
+      icon: BoxedIcon(WeatherIcons.day_sunny),
       onPressed: () {
           print("Foo");
       }
+     );
+  }
+}
+```
+
+### Note
+
+Because of how the icons exist in the font file, there will be some display issues when using a standard `Icon` widget. The icon will draw outside of its boundaries causing issues with layouts and padding, etc.
+
+You can see an example of this in the `example/` application.
+
+In order to overcome this, the library exposes a widget called `BoxedIcon`. Which puts the icon into a 'box' which properly sets its height, and width. Preventing any of the out of boundary drawing.
+
+Anywhere you can use `Icon`, you can swap it out for `BoxedIcon`.
+
+```dart
+class MyWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Icon(
+      icon: BoxedIcon(WeatherIcons.day_sunny),
+      onPressed: () {}
      );
   }
 }
@@ -58,7 +79,7 @@ class WeatherDisplay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Icon(
+          BoxedIcon(
             WeatherIcons.fromString(
                 weatherCode,
                 // Fallback is optional, throws if not found, and not supplied.
@@ -76,6 +97,8 @@ class WeatherDisplay extends StatelessWidget {
 ### Wind Direction
 
 The wind icon is a special icon, as it is one single icon value that is then rotated using CSS. To achieve a similar functionality you can use the `WindIcon` class.
+
+The `WindIcon`'s always use `BoxedIcon`.
 
 **Note:** This means that `WeatherIcons.wind` will always be the North facing icon.
 
@@ -131,24 +154,24 @@ class WindDirectionDisplay extends StatelessWidget {
 ```dart
 // Manual hour
 IconButton(
-  icon: TimeIcon.iconFromHour(3),
+  icon: BoxedIcon(TimeIcon.iconFromHour(3)),
   onPressed: () { print("Displaying the third hour!"); }
 );
 
 // Using a DateTime instance
 IconButton(
-  icon: TimeIcon.iconFromDate(DateTime.now()),
+  icon: BoxedIcon(TimeIcon.iconFromDate(DateTime.now())),
   onPressed: () { print("Current hour"); }
 );
 
 // Creating your own Icon
-Icon(
+BoxedIcon(
   icon: TimeIcon.fromHour(3),
   size: 60,
 )
 
 // Also using a DateTime
-Icon(
+BoxedIcon(
   icon: TimeIcon.fromDate(DateTime.now()),
   size: 60,
 )
