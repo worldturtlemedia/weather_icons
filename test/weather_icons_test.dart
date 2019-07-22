@@ -45,4 +45,25 @@ void main() {
     );
     expect(() => Rotate(degree: 42, child: null), throwsAssertionError);
   });
+
+  test('BoxedIcon should not accept a null icon', () {
+    expect(() => BoxedIcon(null), throwsAssertionError);
+  });
+
+  testWidgets('should set the opacity of the icon color', (tester) async {
+    final expected = Colors.amber.withOpacity(0);
+    await tester.pumpWidget(IconTheme(
+      data: IconThemeData(
+        color: Colors.amber,
+        opacity: 0.0,
+      ),
+      child: BoxedIcon(WeatherIcons.day_fog),
+    ));
+
+    final RichText test = tester.firstWidget(find.byType(RichText));
+    expect(test, isNotNull);
+
+    final span = test.text as TextSpan;
+    expect(span.style.color, expected);
+  });
 }
