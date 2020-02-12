@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /// Rotates the [child] by the [degree] degrees.
 class Rotate extends StatelessWidget {
-  final double degree;
+  final num degree;
   final Widget child;
   final Alignment alignment;
 

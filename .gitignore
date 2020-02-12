@@ -15,6 +15,7 @@ do_release
 tmp
 .tmp
 coverage
+.vscode/settings.json
 
 # IntelliJ related
 *.iml
