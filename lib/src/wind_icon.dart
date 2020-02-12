@@ -22,7 +22,7 @@ import 'package:weather_icons/src/util/rotate.dart';
 ///       onPressed: () { }
 ///     );
 class WindIcon extends BoxedIcon {
-  final double degree;
+  final num degree;
 
   const WindIcon({
     @required this.degree,
