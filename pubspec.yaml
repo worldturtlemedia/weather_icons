@@ -1,7 +1,6 @@
 name: weather_icons
 description: Flutter library for using erikflowers/weather-icons. An icon pack with over 200 weather themed icons.
 version: 0.0.0 # Handled by semantic-release
-author: WorldTurtleMedia <jordon.dehoog@gmail.com>
 email: jordon.dehoog@gmail.com
 repository: https://github.com/worldturtlemedia/weather_icons
 homepage: https://worldturtlemedia.com
