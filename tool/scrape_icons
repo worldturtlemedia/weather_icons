@@ -158,7 +158,7 @@ function genHeader(date) {
 function generateDartFile(iconData, date) {
   const icons = iconData.map(({ title, code }) => generateIcon(title, code))
 
-  const iconMap = iconData.map(({ title, code }) => `'${title}': 0x${code},`)
+  const iconMap = iconData.map(({ title, code }) => `'${title}': ${title.replace('wi-', '').replace(/-/g, '_')},`)
 
   return `
 ${genHeader(date)}
@@ -204,10 +204,10 @@ class WeatherIcons {
       throw UnsupportedError('Unsupported icon $name, with no fallback');
     }
 
-    return exists ? WIData(_all[target]) : fallback;
+    return exists ? _all[target] : fallback;
   }
 
-  static const Map<String, int> _all = {
+  static const Map<String, IconData> _all = {
     ${iconMap.join('\n    ')}
   };
 }

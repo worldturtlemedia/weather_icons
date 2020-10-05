@@ -1,5 +1,5 @@
 class WeatherIconsUtil {
-  static const int dateTimestamp = 1563582063844;
+  static const int dateTimestamp = 1601885646647;
 
   static const Map<String, int> iconMap = {
     'wi-day-sunny': 0xf00d,
