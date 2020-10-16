@@ -85,7 +85,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "./tool/publish.sh ${nextRelease.version}"
+          "prepareCmd": "echo Run `./tool/publish.sh ${nextRelease.version}` to publish to pub.dev"
         }
       ],
       [

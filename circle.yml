@@ -119,10 +119,10 @@ workflows:
       - build_sample:
           requires:
             - install_dependencies
-      # - release:
-      #     requires:
-      #       - build_library
-      #       - build_sample
-      #     filters:
-      #       branches:
-      #         only: master
+      - release:
+          requires:
+            - build_library
+            - build_sample
+          filters:
+            branches:
+              only: master
