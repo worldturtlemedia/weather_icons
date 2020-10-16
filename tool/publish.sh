@@ -26,14 +26,6 @@ fi
 
 cd $PARENT
 
-echo "Decrypting secrets... to $HOME/.pub-cache"
-./secret/secrets.sh decrypt "$HOME/.pub-cache" $DECRYPT_PASSWORD
-retVal=$?
-if [ ! $retVal -eq 0 ]; then
-  echo "Failed to decrypt the secrets!"
-  exit 1
-fi
-
 echo "Updating pubspec with new version $1"
 node ./tool/update_version --ver $1
 retVal=$?
