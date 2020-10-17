@@ -1,21 +1,9 @@
 #!/bin/bash
 
-# Usage ./prepare.sh <version> [decryption password]
-# Decryption password can also be set with the env var: PUB_SECRET_PASSWORD
+# Usage ./prepare.sh <version>
 
 CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PARENT="$(cd $CWD/.. >/dev/null 2>&1 && pwd)"
-
-DECRYPT_PASSWORD=$2
-if [ -z "$DECRYPT_PASSWORD" ]; then
-  DECRYPT_PASSWORD=$PUB_SECRET_PASSWORD
-
-  if [ -z "$DECRYPT_PASSWORD" ]; then
-    echo "No decryption password was supplied!"
-    echo "Either pass it in to this script, or set PUB_SECRET_PASSWORD in your ENV"
-    exit 1
-  fi
-fi
 
 set -e
 
