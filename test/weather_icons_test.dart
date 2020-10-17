@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_icons/weather_icons.dart';
 import 'package:weather_icons/src/util/rotate.dart';
 
+import '../lib/src/util/wi_data.dart';
 import 'util/test_widget.dart';
 
 void main() {
@@ -65,5 +66,12 @@ void main() {
 
     final span = test.text as TextSpan;
     expect(span.style.color, expected);
+  });
+
+  test('Creation of a WIData object', () {
+    final data = WIData(42);
+    expect(data.codePoint, 42);
+    expect(data.fontFamily, WIData.FONT_FAMILY);
+    expect(data.fontPackage, WIData.FONT_PACKAGE);
   });
 }
