@@ -33,7 +33,7 @@
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
     "request": "^2.88.0",
-    "semantic-release": "15.13.16",
+    "semantic-release": "17.2.3",
     "x-ray": "^2.3.4",
     "yargs": "^13.3.0"
   },
