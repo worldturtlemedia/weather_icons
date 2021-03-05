@@ -1,6 +1,5 @@
 # [3.0.0-nullsafety.0](https://github.com/worldturtlemedia/weather_icons/compare/v2.0.2...v3.0.0-nullsafety.0) (2021-03-05)
 
-
 ### Features
 
 * **null-safety:** migrate library to dart null-safety ([#16](https://github.com/worldturtlemedia/weather_icons/issues/16)) ([4cbdd2a](https://github.com/worldturtlemedia/weather_icons/commit/4cbdd2a))
@@ -10,7 +9,6 @@
 ### BREAKING CHANGES
 
 * **null-safety:** library have been migrated to dart null-safety
-
 
 ## [2.0.2](https://github.com/worldturtlemedia/weather_icons/compare/v2.0.1...v2.0.2) (2020-10-17)
 
@@ -49,6 +47,3 @@
 
 * **timeicon:** Remove two Time icon helper functions.  In favour of creating a class instead of a
 function, so you can properly customize the icons.
-
-
-
