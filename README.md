@@ -14,7 +14,16 @@ Add the dependency to your `pubspec.yaml`
 
 ```yaml
 dependencies:
-  weather_icons: 1.0.x # Use the latest version
+  weather_icons: 2.0.x # Use the latest version
+```
+
+### Null safety
+
+To opt-in to the latest null-safe version use:
+
+```yaml
+dependencies:
+  weather_icons: 3.0.0-nullsafety.x # Use the latest version
 ```
 
 ## Usage
