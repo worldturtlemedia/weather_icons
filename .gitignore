@@ -1,3 +1,4 @@
+flutter_export_environment.sh 
 credentials.json
 do_release
 .prettierrc
