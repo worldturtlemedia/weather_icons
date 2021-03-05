@@ -25,12 +25,11 @@ class WindIcon extends BoxedIcon {
   final num degree;
 
   const WindIcon({
-    @required this.degree,
-    Key key,
-    double size,
-    Color color,
-  })  : assert(degree != null),
-        assert(degree >= 0 && degree <= 360),
+    required this.degree,
+    Key? key,
+    double? size,
+    Color? color,
+  })  : assert(degree >= 0 && degree <= 360),
         super(
           WeatherIcons.wind,
           key: key,

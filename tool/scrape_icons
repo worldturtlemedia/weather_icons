@@ -196,15 +196,18 @@ class WeatherIcons {
   ///     );
   static IconData fromString(
     String name, {
-    IconData fallback,
+    IconData? fallback,
   }) {
     final target = name.replaceAll('_', '-');
-    final exists = _all.containsKey(target);
-    if (!exists && fallback == null) {
+    final icon = _all[target];
+
+    if (icon != null) {
+      return icon;
+    } else if (fallback != null) {
+      return fallback;
+    } else {
       throw UnsupportedError('Unsupported icon $name, with no fallback');
     }
-
-    return exists ? _all[target] : fallback;
   }
 
   static const Map<String, IconData> _all = {

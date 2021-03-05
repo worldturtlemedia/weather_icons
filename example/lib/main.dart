@@ -48,23 +48,23 @@ class MyHomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("All icons (Regular Icon())"),
               onPressed: () => _navigate(context, "all"),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("All icons (BoxedIcon())"),
               onPressed: () => _navigate(context, "all-boxed"),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Dynamic icon"),
               onPressed: () => _navigate(context, "dynamic"),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Time icons"),
               onPressed: () => _navigate(context, "time"),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Wind icons"),
               onPressed: () => _navigate(context, "wind"),
             ),

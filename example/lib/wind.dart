@@ -36,7 +36,7 @@ class _WindScreenState extends State<WindScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                   child: Text("-20"),
                   onPressed: () {
                     _updateHour(_degree - 20);
@@ -49,7 +49,7 @@ class _WindScreenState extends State<WindScreen> {
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("+20"),
                   onPressed: () {
                     _updateHour(_degree + 20);

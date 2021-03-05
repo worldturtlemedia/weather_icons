@@ -18,26 +18,25 @@ import 'package:flutter/material.dart';
 ///     );
 class BoxedIcon extends StatelessWidget {
   final IconData icon;
-  final double size;
-  final Color color;
+  final double? size;
+  final Color? color;
 
   const BoxedIcon(
     this.icon, {
-    Key key,
+    Key? key,
     this.size,
     this.color,
-  })  : assert(icon != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final IconThemeData iconTheme = IconTheme.of(context);
 
-    final double iconSize = size ?? iconTheme.size;
+    final double iconSize = size ?? iconTheme.size!;
 
-    final double iconOpacity = iconTheme.opacity;
-    Color iconColor = color ?? iconTheme.color;
-    if (iconOpacity != 1.0)
+    final double? iconOpacity = iconTheme.opacity;
+    Color? iconColor = color ?? iconTheme.color;
+    if (iconColor != null && iconOpacity != null && iconOpacity != 1.0)
       iconColor = iconColor.withOpacity(iconColor.opacity * iconOpacity);
 
     return SizedBox(

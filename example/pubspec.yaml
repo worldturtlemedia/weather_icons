@@ -1,6 +1,6 @@
 name: weather_icons_example
 description: An example showcasing the `weather_icons` package.
-
+publish_to: none
 version: 1.0.0+1
 
 environment:

@@ -4,8 +4,8 @@ class TestWidget extends StatelessWidget {
   final Widget child;
 
   const TestWidget({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
