@@ -6,10 +6,6 @@ import 'package:weather_icons/weather_icons.dart';
 import 'util/test_widget.dart';
 
 void main() {
-  test('should not accept a null degree', () {
-    expect(() => WindIcon(degree: null), throwsAssertionError);
-  });
-
   test('should throw on an invalid degree', () {
     expect(() => WindIcon(degree: -5), throwsAssertionError);
     expect(() => WindIcon(degree: 0), returnsNormally);

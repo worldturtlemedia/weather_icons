@@ -9,15 +9,11 @@ class Rotate extends StatelessWidget {
   final Alignment alignment;
 
   const Rotate({
-    Key key,
-    @required this.degree,
-    @required this.child,
+    Key? key,
+    required this.degree,
+    required this.child,
     this.alignment = Alignment.center,
-  })  : assert(degree != null),
-        assert(child != null),
-        super(
-          key: key,
-        );
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -39,18 +39,6 @@ void main() {
     expect(find.byWidget(child), findsOneWidget);
   });
 
-  test('should throw on null constructor params', () {
-    expect(
-      () => Rotate(degree: null, child: Placeholder()),
-      throwsAssertionError,
-    );
-    expect(() => Rotate(degree: 42, child: null), throwsAssertionError);
-  });
-
-  test('BoxedIcon should not accept a null icon', () {
-    expect(() => BoxedIcon(null), throwsAssertionError);
-  });
-
   testWidgets('should set the opacity of the icon color', (tester) async {
     final expected = Colors.amber.withOpacity(0);
     await tester.pumpWidget(IconTheme(
@@ -65,7 +53,7 @@ void main() {
     expect(test, isNotNull);
 
     final span = test.text as TextSpan;
-    expect(span.style.color, expected);
+    expect(span.style!.color, expected);
   });
 
   test('Creation of a WIData object', () {
