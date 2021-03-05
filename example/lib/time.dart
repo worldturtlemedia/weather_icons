@@ -37,7 +37,7 @@ class _TimeScreenState extends State<TimeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                   child: Text("-"),
                   onPressed: () {
                     _updateHour(_hour - 1);
@@ -50,7 +50,7 @@ class _TimeScreenState extends State<TimeScreen> {
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("+"),
                   onPressed: () {
                     _updateHour(_hour + 1);
