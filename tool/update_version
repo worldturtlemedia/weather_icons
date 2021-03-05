@@ -4,7 +4,7 @@ const { resolve } = require('path')
 
 const yargs = require('yargs').argv
 const { readFile, writeFile } = require('fs-extra')
-const { safeLoad, safeDump } = require('js-yaml')
+const { load, dump } = require('js-yaml')
 
 const verbose = yargs.v || yargs.verbose || false
 const version = yargs.ver
@@ -41,7 +41,7 @@ async function start() {
 async function readPubspec() {
   try {
     const pubspec = await readFile(PUBSPEC, 'utf8')
-    return safeLoad(pubspec)
+    return load(pubspec)
   } catch (error) {
     console.error('Unable to read pubspec!')
     console.error(error)
@@ -50,7 +50,7 @@ async function readPubspec() {
 }
 
 async function writePubspec(pubspec) {
-  const output = safeDump({ ...pubspec, version })
+  const output = dump({ ...pubspec, version })
 
   try {
     log.v('Writing updated pubspec')
